@@ -244,22 +244,7 @@ const HermitsNotebook = struct {
     fn getEntry(self: *HermitsNotebook, place: *const Place) ?*NotebookEntry {
         for (&self.entries, 0..) |*entry, i| {
             if (i >= self.end_of_entries) break;
-
-            // Here's where the hermit got stuck. We need to return
-            // an optional pointer to a NotebookEntry.
-            //
-            // What we have with "entry" is the opposite: a pointer to
-            // an optional NotebookEntry!
-            //
-            // To get one from the other, we need to dereference
-            // "entry" (with .*) and get the non-null value from the
-            // optional (with .?) and return the address of that. The
-            // if statement provides some clues about how the
-            // dereference and optional value "unwrapping" look
-            // together. Remember that you return the address with the
-            // "&" operator.
             if (place == entry.*.?.place) return &entry.*.?;
-            // Try to make your answer this long:__________;
         }
         return null;
     }
