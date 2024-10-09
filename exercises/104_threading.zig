@@ -91,6 +91,7 @@ pub fn main() !void {
     {
         // Now we start the first thread, with the number as parameter
         const handle = try std.Thread.spawn(.{}, thread_function, .{1});
+        std.time.sleep(1 * std.time.ns_per_ms);
 
         // Waits for the thread to complete,
         // then deallocates any resources created on `spawn()`.
